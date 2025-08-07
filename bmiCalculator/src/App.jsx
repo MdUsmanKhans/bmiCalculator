@@ -2,12 +2,20 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
+
+  // State variables
   const [weight, setWeight] = useState(0);       // in kilograms
   const [feet, setFeet] = useState(0);           // height (feet part)
   const [inches, setInches] = useState(0);       // height (inches part)
   const [bmi, setBmi] = useState('');
   const [message, setMessage] = useState('');
 
+  // Function to calculate BMI
+  // It takes an event as an argument to prevent default form submission behavior
+  // It checks if the weight and height are valid, calculates BMI, and sets the message
+  // based on the BMI value
+  // It also handles the case where the user clicks the reload button to reset the form
+  // and clear the results
   const bmiCal = (e) => {
     e.preventDefault();
 
@@ -16,6 +24,8 @@ function App() {
       return;
     }
 
+    // Convert height from feet and inches to meters
+    // 1 foot = 12 inches, 1 inch = 0.0254
     const totalInches = (Number(feet) * 12) + Number(inches);
     const heightInMeters = totalInches * 0.0254; // convert to meters
 
@@ -24,6 +34,8 @@ function App() {
 
     setBmi(roundedBmi);
 
+
+    // Set message based on BMI value
     if (calculatedBmi < 18.5) {
       setMessage("You are underweight");
     } else if (calculatedBmi < 25) {
@@ -35,6 +47,17 @@ function App() {
     }
   };
 
+
+  // Function to reset the form and clear the results
+  // It sets all state variables to their initial values
+  // This function is called when the user clicks the reload button
+  // It resets the weight, feet, inches, bmi, and message to their initial states
+  // This allows the user to start over without refreshing the page
+  // It also ensures that the form is ready for new input
+  // and the results are cleared
+  // This is useful for user experience, allowing them to quickly re-enter data
+  // without having to reload the entire application
+  // It provides a convenient way to reset the form without losing the application state
   const reload = () => {
     setWeight(0);
     setFeet(0);
@@ -43,10 +66,16 @@ function App() {
     setMessage('');
   };
 
+  // Render the BMI calculator form
   return (
     <div className="App">
       <div className="container">
         <h2>BMI Calculator</h2>
+        // Form to input weight and height
+        // It includes input fields for weight in kg, height in feet and inches
+        // It also includes a submit button to calculate BMI and a reload button to reset the form
+        // The form uses controlled components to manage the state of the input fields
+        // The submit button triggers the bmiCal function to calculate BMI
         <form onSubmit={bmiCal}>
           <div>
             <label>Weight (kg)</label>
