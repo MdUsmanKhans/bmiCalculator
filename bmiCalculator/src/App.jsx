@@ -75,7 +75,7 @@ function App() {
         // It includes input fields for weight in kg, height in feet and inches
         // It also includes a submit button to calculate BMI and a reload button to reset the form
         // The form uses controlled components to manage the state of the input fields
-        // The submit button triggers the bmiCal function to calculate BMI
+        // The submit button triggers the bmiCalculator function to calculate BMI
         <form onSubmit={bmiCal}>
           <div>
             <label>Weight (kg)</label>
